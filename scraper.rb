@@ -1,16 +1,16 @@
 require 'nokogiri'
 require 'open-uri'
 
-# Assign the url we want to scrape to a variable
 craigslist_apartments_url = "http://toronto.en.craigslist.ca/apa/"
 
-# Use the 'open' method in Nokogiri to scrape the contents
-# of the target url
 craigslist_apartments = Nokogiri::HTML(open(craigslist_apartments_url))
 
-# Print out each paragraph element
+# Create an array called page_contents
+page_contents = []
+
 craigslist_apartments.css('p.row').each do |item|
-  # Use a css selector to print links for each of the items
-  # you've scraped from the page
-  puts item.css('a')
+  # Use << (sometimes called a shovel) to add each of the links to the
+  # page_contents array. When you run this script, nothing will be printed
+  # to the terminal but page_contents will contain all of the items
+  page_contents << item.css('a')
 end
