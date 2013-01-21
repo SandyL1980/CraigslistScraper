@@ -10,5 +10,7 @@ craigslist_apartments = Nokogiri::HTML(open(craigslist_apartments_url))
 
 # Print out each paragraph element
 craigslist_apartments.css('p.row').each do |item|
-  puts item
+  # Use a css selector to print links for each of the items
+  # you've scraped from the page
+  puts item.css('a')
 end
