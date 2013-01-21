@@ -10,18 +10,15 @@ page_contents = []
 craigslist_apartments.css('p.row').each do |item|
   apartment = Hash.new
 
-  # Create a key called 'description' and set the value
-  # we call '.text', a nokogiri method, because it strips
-  # out the surrounding tags (e.g., <a href="..."> and </a>)
+  # Now we want to add a price, number of bedrooms, and square footage for
+  # each of the apartments to the hash. Our only problem is that all of this information
+  # is stored in a single element, called .itemph. If we try to add .itemph it will give us
+  # everything in one block of text. Try running this script and see what happens.
   apartment["description"] = item.css('a').text
+  apartment["price"] = item.css('.itemph').text
 
-  # Each item in the array will contain a hash
-  # for now the hash only contains a description
   page_contents << apartment
 
 end
 
-# Now let's print out the contents of the page_contents array
-# to the terminal. You should expect to see a list of hashes
-# containing the key ("description") and the corresponding values
 puts page_contents
