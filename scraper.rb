@@ -8,5 +8,7 @@ craigslist_apartments_url = "http://toronto.en.craigslist.ca/apa/"
 # of the target url
 craigslist_apartments = Nokogiri::HTML(open(craigslist_apartments_url))
 
-# Print the contents of craigslist_apartments to the terminal
-puts craigslist_apartments
+# Print out each paragraph element
+craigslist_apartments.css('p.row').each do |item|
+  puts item
+end
