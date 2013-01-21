@@ -8,17 +8,20 @@ craigslist_apartments = Nokogiri::HTML(open(craigslist_apartments_url))
 page_contents = []
 
 craigslist_apartments.css('p.row').each do |item|
-  # We're going to store data using an array of hashes
-  # We'll need a hash that we can use to store the following data
-  # - description
-  # - price
-  # - number of bedrooms
-  # - square footage
-  # Start by creating a hash called 'apartment'
-  # We'll soon be able to access individual items in the page_contents array
-  # by using commands like page_contents[0]["description"]
   apartment = Hash.new
 
-  page_contents << item.css('a')
+  # Create a key called 'description' and set the value
+  # we call '.text', a nokogiri method, because it strips
+  # out the surrounding tags (e.g., <a href="..."> and </a>)
+  apartment["description"] = item.css('a').text
+
+  # Each item in the array will contain a hash
+  # for now the hash only contains a description
+  page_contents << apartment
 
 end
+
+# Now let's print out the contents of the page_contents array
+# to the terminal. You should expect to see a list of hashes
+# containing the key ("description") and the corresponding values
+puts page_contents
