@@ -7,6 +7,10 @@ craigslist_apartments = Nokogiri::HTML(open(craigslist_apartments_url))
 
 page_contents = []
 
+def parse_description(description)
+  # Let's create a method that can parse the contents of the .itemph element
+end
+
 craigslist_apartments.css('p.row').each do |item|
   apartment = Hash.new
 
